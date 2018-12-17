@@ -46,8 +46,12 @@ def batch_hack_captcha():
         # saver = tf.train.import_meta_graph(save_model + ".meta")
         saver.restore(sess, tf.train.latest_checkpoint(model_path))
 
+
+
+        #/Users/zhymacbookair/PycharmProjects/work/crack/model
+
         stime = time.time()
-        task_cnt = 1000
+        task_cnt = 10
         right_cnt = 0
         for i in range(task_cnt):
             text, image = wrap_gen_captcha_text_and_image()

@@ -1,4 +1,5 @@
 import random
+import uuid
 from os import path
 from os.path import join
 
@@ -12,8 +13,6 @@ from capt.cfg import gen_char_set
 
 
 # 验证码一般都无视大小写；验证码长度4个字符
-
-
 def random_captcha_text(
         # char_set=number + alphabet + ALPHABET,
         char_set=gen_char_set,
@@ -67,13 +66,13 @@ def __gen_and_save_image():
     :return:
     """
 
-    for i in range(50000):
+    for i in range(5):
         text, image = wrap_gen_captcha_text_and_image()
 
         im = Image.fromarray(image)
 
-        uuid = uuid.uuid1().hex
-        image_name = '__%s__%s.png' % (text, uuid)
+        myUuid = uuid.uuid1().hex
+        image_name = '__%s__%s.png' % (text, myUuid)
 
         img_root = join(capt.cfg.workspace, 'train')
         image_file = path.join(img_root, image_name)
@@ -86,7 +85,7 @@ def __demo_show_img():
     :return:
     """
     text, image = wrap_gen_captcha_text_and_image()
-
+    print("验证码text:", text)
     print("验证码图像channel:", image.shape)  # (60, 160, 3)
 
     f = plt.figure()
@@ -98,5 +97,6 @@ def __demo_show_img():
 
 
 if __name__ == '__main__':
-    # gen_and_save_image()
+    __gen_and_save_image()
+    # __demo_show_img()
     pass
